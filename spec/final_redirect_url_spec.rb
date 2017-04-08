@@ -10,6 +10,7 @@ RSpec.describe FinalRedirectUrl do
       # If invalid URL, returns 404 Not Found
     end
   end
+
   context "with no redirects" do
     it "returns the original url" do
       expect(false).to eq(true)

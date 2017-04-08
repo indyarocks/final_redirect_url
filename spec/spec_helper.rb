@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "final_redirect_url"
+require "final_redirect_url/validation"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
