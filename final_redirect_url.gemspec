@@ -6,13 +6,13 @@ require 'final_redirect_url/version'
 Gem::Specification.new do |spec|
   spec.name          = "final_redirect_url"
   spec.version       = FinalRedirectUrl::VERSION
-  spec.authors       = ["Chandan Kumar"]
-  spec.email         = ["chandan.jhun@gmail.com"]
+  spec.authors       = ["Chandan Kumar", "Vipala Gavas"]
+  spec.email         = ["chandan.jhun@gmail.com", "vipalagavas@gmail.com"]
 
   spec.summary       = %q{Get a final redirect url for a given url.}
   spec.description   = %q{A URL might have multiple redirects. The objective of this gem is to
                          extract the final redirected url.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/indyarocks/final_redirect_url"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
