@@ -5,6 +5,11 @@ RSpec.describe FinalRedirectUrl do
     expect(FinalRedirectUrl::VERSION).not_to be nil
   end
 
+  context "with invalid url" do
+    it "returns error" do
+      # If invalid URL, returns 404 Not Found
+    end
+  end
   context "with no redirects" do
     it "returns the original url" do
       expect(false).to eq(true)
