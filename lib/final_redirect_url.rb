@@ -1,4 +1,4 @@
-require "final_redirect_url/version"
+require 'final_redirect_url/version'
 
 module FinalRedirectUrl
 
@@ -13,7 +13,7 @@ module FinalRedirectUrl
 
   private
   def self.is_valid_url?(url)
-    # Validate URL
+    url.to_s =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 
   def get_final_redirect_url(url, limit = 10)
