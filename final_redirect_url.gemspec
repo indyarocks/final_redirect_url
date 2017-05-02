@@ -6,7 +6,7 @@ require 'final_redirect_url/version'
 Gem::Specification.new do |spec|
   spec.name          = "final_redirect_url"
   spec.version       = FinalRedirectUrl::VERSION
-  spec.authors       = ["Chandan Kumar", "Dot Gaga"]
+  spec.authors       = ["Chandan Jhunjhunwal"]
   spec.email         = ["chandan.jhun@gmail.com"]
 
   spec.summary       = %q{Get a final redirect url for a given url.}

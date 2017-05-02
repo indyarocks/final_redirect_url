@@ -16,7 +16,7 @@ module FinalRedirectUrl
     url.to_s =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 
-  def get_final_redirect_url(url, limit = 10)
+  def self.get_final_redirect_url(url, limit = 10)
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
     if response.class == Net::HTTPOK

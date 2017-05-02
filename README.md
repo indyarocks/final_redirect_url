@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Usually the gem checks for redirect upto 10 depth level. However you can pass `{depth: 20}` to check redirects upto `20` depth.
 
 ## Development
 
