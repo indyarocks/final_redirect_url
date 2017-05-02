@@ -20,6 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
+```ruby
+FinalRedirectUrl.final_redirect_url('http://www.google.com')
+```
+
 Usually the gem checks for redirect upto 10 depth level. However you can pass `{depth: 20}` to check redirects upto `20` depth.
 
 ## Contributing
