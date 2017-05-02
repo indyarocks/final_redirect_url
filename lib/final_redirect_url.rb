@@ -1,14 +1,20 @@
 require 'final_redirect_url/version'
 require 'net/http'
+require 'logger'
 
 module FinalRedirectUrl
 
   def self.final_redirect_url(url, options={})
     final_url = ''
     if is_valid_url?(url)
-      redirect_lookup_depth = options[:depth].to_i > 0 ? options[:depth].to_i : 10
-      response_uri = get_final_redirect_url(url, redirect_lookup_depth)
-      final_url =  url_string_from_uri(response_uri)
+      begin
+        redirect_lookup_depth = options[:depth].to_i > 0 ? options[:depth].to_i : 10
+        response_uri = get_final_redirect_url(url, redirect_lookup_depth)
+        final_url =  url_string_from_uri(response_uri)
+      rescue Exception => ex
+        logger = Logger.new(STDOUT)
+        logger.error(ex.message)
+      end
     end
     final_url
   end
