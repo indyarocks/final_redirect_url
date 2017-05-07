@@ -19,9 +19,30 @@ Or install it yourself as:
     $ gem install final_redirect_url
 
 ## Usage
+NOTE: The input url must start with http/https protocol.
 
 ```ruby
 FinalRedirectUrl.final_redirect_url('http://www.google.com')
+```
+
+From IRB:
+```ruby
+2.4.0 :001 > require 'final_redirect_url'
+ => true
+ 
+# No protocol provided
+2.4.0 :002 > FinalRedirectUrl.final_redirect_url('www.google.com')
+ => ""
+
+# With valid protocol
+2.4.0 :003 > FinalRedirectUrl.final_redirect_url('http://google.com')
+redirected to http://www.google.co.in/?gfe_rd=cr&ei=J-cOWYKhCKb98wfOsb2ADA
+ => "http://www.google.co.in/?gfe_rd=cr&ei=J-cOWYKhCKb98wfOsb2ADA"
+
+# URI with invalid response
+2.4.0 :004 > FinalRedirectUrl.final_redirect_url('http://api.google.com')
+E, [2017-05-07T14:52:39.497203 #1358] ERROR -- : bad URI(is not URI?):
+ => ""
 ```
 
 Usually the gem checks for redirect upto 10 depth level. However you can pass `{depth: 20}` to check redirects upto `20` depth.
