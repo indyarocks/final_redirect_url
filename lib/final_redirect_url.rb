@@ -25,6 +25,7 @@ module FinalRedirectUrl
   end
 
   def self.get_final_redirect_url(url, limit = 10)
+    return url if limit <= 0
     uri = URI.parse(url)
     response = ::Net::HTTP.get_response(uri)
     if response.class == Net::HTTPOK
