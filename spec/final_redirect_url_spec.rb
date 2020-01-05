@@ -5,6 +5,13 @@ RSpec.describe FinalRedirectUrl do
     expect(FinalRedirectUrl::VERSION).not_to be nil
   end
 
+  context "with truth url" do
+    it "return truth" do
+      expect(FinalRedirectUrl.is_valid_url?("http://command-not-found.com")).to be true
+      expect(FinalRedirectUrl.is_valid_url?("https://build.com")).to be true
+    end
+  end
+
   context "with invalid url" do
     it "returns error" do
       # If invalid URL, returns 404 Not Found
