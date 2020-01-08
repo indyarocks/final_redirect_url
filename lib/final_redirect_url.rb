@@ -21,7 +21,7 @@ module FinalRedirectUrl
 
   private
   def self.is_valid_url?(url)
-    url.to_s =~ /\A#{URI::regexp(['http', 'https'])}\z/
+    url.to_s.match? URI::regexp(['http', 'https'])
   end
 
   def self.get_final_redirect_url(url, limit = 10)
