@@ -1,11 +1,14 @@
-require "bundler/setup"
-require "final_redirect_url"
+require 'bundler/setup'
+require 'webmock/rspec'
+require 'final_redirect_url'
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+  config.example_status_persistence_file_path = '.rspec_status'
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  # Disable all real network connections in the test suite.
+  config.before(:suite) { WebMock.disable_net_connect! }
 end
