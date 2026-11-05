@@ -7,6 +7,55 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.1.0] – 2026-11-05
+
+### Fork Contributions Integrated
+Analysed all six public forks. Two contained work worth considering:
+
+- **counterfind/final_redirect_url** (9 commits ahead): introduced Nokogiri meta-refresh parsing,
+  per-request timeouts, and HTTPS via `use_ssl`. The meta-refresh concept was adopted and
+  rewritten from scratch (removed `pry`, removed `KNOWN_SHORTENERS`, eliminated the
+  thread-unsafe module-level `@final_url`, fixed the deprecated `URI.regexp` call, replaced
+  `rescue Exception`, and switched `uri.host` → `uri.to_s` to preserve ports). Architecture
+  unchanged.
+- **HowardSnowden/final_redirect_url** (4 commits ahead): extracted `get_response` as a named
+  method and added explicit SSL cipher configuration. The pattern was incorporated into the
+  new `fetch_response` method; the hardcoded cipher list was not adopted (unnecessary for
+  modern Ruby/OpenSSL).
+- **pilot34, mbv, ymow**: trivial (limit logging, version bump, no changes) — discarded.
+
+### Added
+- **`FinalRedirectUrl.trace(url, options)`** — returns `Array<Hop>` documenting every URL and
+  HTTP status code visited in the redirect chain. Useful for debugging and link audits.
+- **`FinalRedirectUrl::Hop`** struct with `url` (String) and `status` (Integer, nil when depth
+  exhausted) attributes.
+- **Custom headers** (`options[:headers]`) — pass any HTTP headers (e.g. `User-Agent`, `Accept`,
+  `Authorization`) to bypass anti-bot blocks or authenticate requests.
+- **Configurable timeouts** — `options[:open_timeout]` and `options[:read_timeout]` default to
+  **60 seconds** (up from the previous 10 s hard-coded value).
+- **`verify_ssl` option** (`true` by default) — set `verify_ssl: false` to bypass strict SSL
+  certificate validation (e.g. for self-signed certificates in development).
+- **Stateful cookie handling** — `Set-Cookie` headers from every 3xx response are captured and
+  injected as `Cookie` headers into subsequent requests, enabling cookie-gated redirect chains
+  to be followed correctly.
+- **Meta-refresh parsing** (via Nokogiri, adapted from the `counterfind` fork) — when a 200 OK
+  response contains `<meta http-equiv="refresh">`, the gem follows the redirect URL. Handles
+  case-insensitive `HTTP-EQUIV`, quoted URLs, and malformed `content` attributes. Only fires
+  for `text/html` responses.
+- **nokogiri** added as a runtime dependency.
+
+### Changed
+- Switched from `HEAD` to `GET` requests. `GET` is required so that the response body is
+  available for meta-refresh parsing; it also improves compatibility with servers that reject
+  `HEAD` with 405.
+- `final_redirect_url` now delegates to `trace` internally, eliminating duplicated logic.
+- Default timeouts raised from 10 s to **60 s**.
+
+### No Open Issues
+All issues were resolved in v2.0.0. No new open issues exist at the time of this release.
+
+---
+
 ## [2.0.0] – 2026-11-05
 
 ### Breaking Changes
@@ -54,6 +103,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   headless browser and are outside the scope of this gem. The gem returns the last HTTP-level
   reachable URL in such cases.
 
+[2.1.0]: https://github.com/indyarocks/final_redirect_url/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/indyarocks/final_redirect_url/compare/v0.1.1...v2.0.0
 [i2]: https://github.com/indyarocks/final_redirect_url/issues/2
 [i3]: https://github.com/indyarocks/final_redirect_url/issues/3

@@ -9,8 +9,9 @@ Gem::Specification.new do |spec|
   spec.email         = ['chandan.jhun@gmail.com']
 
   spec.summary       = 'Get the final redirect URL for any given URL.'
-  spec.description   = 'Follows HTTP redirects (including HTTPS, relative paths, and ' \
-                       'non-standard ports) to resolve the final destination URL.'
+  spec.description   = 'Follows HTTP/HTTPS redirects (including meta-refresh, cookie-gated ' \
+                       'redirects, relative paths, and non-standard ports) to resolve the ' \
+                       'final destination URL. Provides a trace method for full hop inspection.'
   spec.homepage      = 'https://github.com/indyarocks/final_redirect_url'
   spec.license       = 'MIT'
 
@@ -26,6 +27,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_dependency 'nokogiri', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake',    '~> 13.0'
