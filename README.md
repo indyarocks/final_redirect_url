@@ -13,6 +13,8 @@ cookie-gated chains — and returns the final destination URL.
 
 ## Installation
 
+### From RubyGems.org (recommended)
+
 ```ruby
 gem 'final_redirect_url'
 ```
@@ -25,6 +27,21 @@ or
 
 ```
 $ gem install final_redirect_url
+```
+
+### From GitHub Packages
+
+```ruby
+# Gemfile
+source "https://rubygems.pkg.github.com/indyarocks" do
+  gem 'final_redirect_url'
+end
+```
+
+Authenticate with a GitHub token that has `read:packages` scope:
+
+```
+$ bundle config https://rubygems.pkg.github.com/indyarocks USERNAME:GITHUB_TOKEN
 ```
 
 ## Basic usage
